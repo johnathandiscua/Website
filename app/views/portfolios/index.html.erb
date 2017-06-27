@@ -3,7 +3,9 @@
 <% @portfolios.each do |portfolio| %>
   <p><%= portfolio.title %></p>
   <p><%= portfolio.subtitle %></p>
-  <%= image_tag portfolio.main_image %>
-  <%= image_tag portfolio.thumb_image %>
+  <p><%= portfolio.body %></p>
+  <%= image_tag portfolio.thumb_image unless portfolio.thumb_image.nil? %>
 
 <% end %>
+
+<a href="https://website-johnathandiscua.c9users.io/pages/home">Go Home</a>
