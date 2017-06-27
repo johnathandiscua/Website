@@ -12,10 +12,28 @@ class PortfoliosController < ApplicationController
 
     respond_to do |format|
       if @portfolio.save
-        format.html { redirect_to portfolio_path, notice: 'Portfolio Added' }
+        format.html { redirect_to portfolios_path, notice: 'Portfolio Added' }
       else
         format.html { render :new }
         format.json { render json: @portfolio.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def edit
+    @portfolio = Portfolio.find(params[:id])
+  end
+  
+  def update
+    @portfolio = Portfolio.find(params[:id])
+    
+    respond_to do |format|
+      if @portfolio.update(params.require(:portfolio).permit(:title, :subtitle, :body))
+        format.html { redirect_to portfolios_path, notice: 'Portfolio Updated.' }
+        format.json { render :show, status: :ok, location: @message }
+      else
+        format.html { render :edit }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
